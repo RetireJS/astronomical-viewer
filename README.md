@@ -2,7 +2,7 @@
 
 An interactive JavaScript AST (Abstract Syntax Tree) explorer and query tool, similar to [Regexr](https://regexr.com/) but for the [Astronomical](https://github.com/RetireJS/astronomical) query language.
 
-**🚀 [Try it live](https://erlend.github.io/astronomical-viewer/)**
+**🚀 [Try it live](https://retirejs.github.io/astronomical-viewer/)**
 
 ## What is this?
 
