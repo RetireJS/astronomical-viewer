@@ -15,7 +15,7 @@ const DEFAULT_JS_CODE = `function greet(name) {
 const result = greet("World");
 console.log(result);`
 
-const DEFAULT_QUERY = '//FunctionDeclaration'
+const DEFAULT_QUERY = '//FunctionDeclaration//Literal'
 
 // Load from localStorage or use defaults
 const jsCode = ref(localStorage.getItem('astronomical-viewer-js') || DEFAULT_JS_CODE)
