@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { TreeNode } from '../utils/astTreeBuilder'
 
 const props = defineProps<{
@@ -8,11 +7,10 @@ const props = defineProps<{
   level?: number
 }>()
 
-const isExpanded = ref(false)
-
 const toggleExpand = () => {
   if (props.node.children.length > 0) {
-    isExpanded.value = !isExpanded.value
+    // eslint-disable-next-line vue/no-mutating-props
+    props.node.isExpanded = !props.node.isExpanded
   }
 }
 
@@ -59,13 +57,13 @@ const indent = (props.level || 0) * 20
         'ancestor-of-match': node.isAncestorOfMatch,
         'primitive-matched': hasMatchedPrimitiveValue(node),
         'has-children': node.children.length > 0,
-        expanded: isExpanded,
+        expanded: node.isExpanded,
       }"
       :style="{ paddingLeft: `${indent}px` }"
       @click="toggleExpand"
     >
       <span class="expand-icon" v-if="node.children.length > 0">
-        {{ isExpanded ? '▼' : '▶' }}
+        {{ node.isExpanded ? '▼' : '▶' }}
       </span>
       <span class="node-label">{{ node.label }}</span>
       <span v-if="showPrimitiveMatch(node)" class="primitive-match-badge">
@@ -73,7 +71,7 @@ const indent = (props.level || 0) * 20
       </span>
     </div>
 
-    <div v-if="isExpanded && node.children.length > 0" class="children">
+    <div v-if="node.isExpanded && node.children.length > 0" class="children">
       <TreeNode
         v-for="(child, index) in node.children"
         :key="`${index}-${child.type}-${child.start}`"

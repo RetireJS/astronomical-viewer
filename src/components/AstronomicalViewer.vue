@@ -101,6 +101,44 @@ const execute = () => {
 execute()
 
 const hasResults = computed(() => tree.value !== null)
+
+const expandToResults = () => {
+  if (!tree.value) return
+
+  // Helper function to check if a node has a primitive match
+  const hasPrimitiveValue = (node: TreeNodeType): boolean => {
+    if (
+      node.type === 'Identifier' &&
+      node.astNode.type === 'Identifier' &&
+      'name' in node.astNode
+    ) {
+      return primitiveResults.value.includes((node.astNode as { name: string }).name)
+    } else if (node.type === 'Literal' && 'value' in node.astNode) {
+      const value = (node.astNode as { value: unknown }).value
+      if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+        return primitiveResults.value.includes(value)
+      }
+    }
+    return false
+  }
+
+  // Deep clone the tree with updated expansion states
+  const cloneWithExpansion = (node: TreeNodeType): TreeNodeType => {
+    const shouldExpand = node.isAncestorOfMatch || node.isMatched || hasPrimitiveValue(node)
+
+    return {
+      ...node,
+      isExpanded: shouldExpand,
+      children: node.children.map((child) => cloneWithExpansion(child)),
+    }
+  }
+
+  if (Array.isArray(tree.value)) {
+    tree.value = tree.value.map((node) => cloneWithExpansion(node))
+  } else {
+    tree.value = cloneWithExpansion(tree.value)
+  }
+}
 </script>
 
 <template>
@@ -131,7 +169,12 @@ const hasResults = computed(() => tree.value !== null)
         ></textarea>
       </div>
 
-      <button @click="execute" class="execute-btn">Execute Query</button>
+      <div class="button-group">
+        <button @click="execute" class="execute-btn">Execute Query</button>
+        <button @click="expandToResults" class="expand-btn" :disabled="matchCount === 0">
+          Expand to Results
+        </button>
+      </div>
     </div>
 
     <div v-if="errorMessage" class="error-message">
@@ -238,7 +281,13 @@ const hasResults = computed(() => tree.value !== null)
   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
 }
 
-.execute-btn {
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.execute-btn,
+.expand-btn {
   background: #4caf50;
   color: white;
   border: none;
@@ -250,8 +299,22 @@ const hasResults = computed(() => tree.value !== null)
   transition: background-color 0.2s;
 }
 
+.expand-btn {
+  background: #2196f3;
+}
+
 .execute-btn:hover {
   background: #45a049;
+}
+
+.expand-btn:hover:not(:disabled) {
+  background: #1976d2;
+}
+
+.expand-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .execute-btn:active {
