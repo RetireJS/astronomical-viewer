@@ -145,7 +145,10 @@ const expandToResults = () => {
   <div class="astronomical-viewer">
     <div class="header">
       <h1>🌌 Astronomical Query Viewer</h1>
-      <p class="subtitle">Interactive JavaScript AST Explorer</p>
+      <p class="subtitle">
+        Interactive JavaScript AST Explorer using
+        <a href="https://www.npmjs.com/package/astronomical">Astronomical</a>
+      </p>
     </div>
 
     <div class="input-section">
