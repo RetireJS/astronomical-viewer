@@ -1,30 +1,30 @@
-# 🌌 Astronomical Query Viewer
+# 🌌 ASTronomical Query Viewer
 
-An interactive JavaScript AST (Abstract Syntax Tree) explorer and query tool, similar to [Regexr](https://regexr.com/) but for the [Astronomical](https://github.com/RetireJS/astronomical) query language.
+An interactive JavaScript AST (Abstract Syntax Tree) explorer and query tool, similar to [Regexr](https://regexr.com/) but for the [ASTronomical](https://github.com/RetireJS/astronomical) query language.
 
 **🚀 [Try it live](https://retirejs.github.io/astronomical-viewer/)**
 
 ## What is this?
 
-Astronomical Query Viewer helps you visualize and test [Astronomical](https://github.com/RetireJS/astronomical) queries against JavaScript code. It provides:
+ASTronomical Query Viewer helps you visualize and test [ASTronomical](https://github.com/RetireJS/astronomical) queries against JavaScript code. It provides:
 
 - **Interactive AST Tree View** - See the complete Abstract Syntax Tree of your JavaScript code
-- **Query Testing** - Write and test Astronomical queries in real-time
+- **Query Testing** - Write and test ASTronomical queries in real-time
 - **Visual Feedback** - Matched nodes are highlighted with their ancestors marked for easy navigation
 - **Persistent State** - Your code and queries are saved in localStorage
 
 ## Features
 
-- 📝 **Dual Pane Editor** - JavaScript code on one side, Astronomical queries on the other
+- 📝 **Dual Pane Editor** - JavaScript code on one side, ASTronomical queries on the other
 - 🌳 **Full AST Visualization** - Explore the entire syntax tree with expand/collapse functionality
 - 🎯 **Match Highlighting** - Matched nodes shown in yellow, ancestors in gray
 - 💾 **Auto-Save** - Your work persists across browser sessions
 - 🔍 **Primitive Results** - Shows both matched AST nodes and primitive values (strings, numbers, booleans)
 - ⚡ **Real-time Updates** - Execute queries and see results instantly
 
-## What is Astronomical?
+## What is ASTronomical?
 
-[Astronomical](https://github.com/RetireJS/astronomical) is a query language for JavaScript ASTs, similar to XPath for XML. It allows you to search for specific patterns in JavaScript code using queries like:
+[ASTronomical](https://github.com/RetireJS/astronomical) is a query language for JavaScript ASTs, similar to XPath for XML. It allows you to search for specific patterns in JavaScript code using queries like:
 
 ```
 //FunctionDeclaration/:id/:name          # Get all function names
@@ -35,7 +35,7 @@ Astronomical Query Viewer helps you visualize and test [Astronomical](https://gi
 ## Usage
 
 1. **Paste JavaScript code** into the top textarea
-2. **Write an Astronomical query** in the query field (supports multiline)
+2. **Write an ASTronomical query** in the query field (supports multiline)
 3. **Click "Execute Query"** to see matches
 4. **Explore the AST** - Click nodes to expand/collapse the tree
 
@@ -92,12 +92,12 @@ npm run lint
 - **Vue 3** - Progressive JavaScript framework
 - **TypeScript** - Type safety and better developer experience
 - **Vite** - Fast build tool and dev server
-- **Astronomical** - JavaScript AST query engine
-- **Meriyah** - Fast ECMAScript parser (used by Astronomical)
+- **ASTronomical** - JavaScript AST query engine
+- **Meriyah** - Fast ECMAScript parser (used by ASTronomical)
 
 ## Known Limitations
 
-- Astronomical's `/:$object` binding feature may fail for runtime-provided identifiers (like `exports`, `module`, `require` in CommonJS) that aren't explicitly declared in the source code
+- ASTronomical's `/:$object` binding feature may fail for runtime-provided identifiers (like `exports`, `module`, `require` in CommonJS) that aren't explicitly declared in the source code
 - The viewer shows the static AST structure and doesn't have access to runtime context
 
 ## Contributing
@@ -110,6 +110,6 @@ This project is open source. See LICENSE file for details.
 
 ## Related Projects
 
-- [Astronomical](https://github.com/RetireJS/astronomical) - The query engine powering this viewer
+- [ASTronomical](https://github.com/RetireJS/astronomical) - The query engine powering this viewer
 - [AST Explorer](https://astexplorer.net/) - General purpose AST visualization tool
 - [Regexr](https://regexr.com/) - Similar interactive tool for regular expressions

@@ -144,10 +144,10 @@ const expandToResults = () => {
 <template>
   <div class="astronomical-viewer">
     <div class="header">
-      <h1>🌌 Astronomical Query Viewer</h1>
+      <h1>🌌 ASTronomical Query Viewer</h1>
       <p class="subtitle">
         Interactive JavaScript AST Explorer using
-        <a href="https://www.npmjs.com/package/astronomical">Astronomical</a>
+        <a href="https://www.npmjs.com/package/astronomical">ASTronomical</a>
       </p>
     </div>
 
@@ -163,7 +163,7 @@ const expandToResults = () => {
       </div>
 
       <div class="input-group">
-        <label for="query-input">Astronomical Query:</label>
+        <label for="query-input">ASTronomical Query:</label>
         <textarea
           id="query-input"
           v-model="queryString"
