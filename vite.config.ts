@@ -11,9 +11,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      astronomical: fileURLToPath(
-        new URL('./node_modules/astronomical/lib/cjs/index.js', import.meta.url),
-      ),
     },
   },
   build: {
