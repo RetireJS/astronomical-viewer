@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { TreeNode } from '../utils/astTreeBuilder'
+import { usePrimitiveMatching } from '../composables/usePrimitiveMatching'
 
 const props = defineProps<{
   node: TreeNode
@@ -7,45 +9,31 @@ const props = defineProps<{
   level?: number
 }>()
 
+const emit = defineEmits<{
+  'update:expanded': [node: TreeNode, expanded: boolean]
+}>()
+
+const { hasMatchedPrimitiveValue, showPrimitiveMatch } = usePrimitiveMatching(
+  props.primitiveResults,
+)
+
 const toggleExpand = () => {
   if (props.node.children.length > 0) {
+    // Create a new node object with updated expansion state
+    const updatedNode = {
+      ...props.node,
+      isExpanded: !props.node.isExpanded,
+    }
+    // Emit the change instead of mutating props
+    emit('update:expanded', updatedNode, !props.node.isExpanded)
+    // For backward compatibility, still mutate the prop
+    // This allows the component to work without parent handling the event
     // eslint-disable-next-line vue/no-mutating-props
     props.node.isExpanded = !props.node.isExpanded
   }
 }
 
-const hasMatchedPrimitiveValue = (node: TreeNode): boolean => {
-  // Check if this node's value matches any primitive results
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const astNode = node.astNode as any
-
-  if (node.type === 'Identifier' && astNode.name) {
-    return props.primitiveResults.includes(astNode.name)
-  } else if (node.type === 'Literal' && astNode.value !== undefined) {
-    return props.primitiveResults.includes(astNode.value)
-  }
-
-  return false
-}
-
-const showPrimitiveMatch = (node: TreeNode): string | number | boolean | null => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const astNode = node.astNode as any
-
-  if (node.type === 'Identifier' && astNode.name && props.primitiveResults.includes(astNode.name)) {
-    return astNode.name
-  } else if (
-    node.type === 'Literal' &&
-    astNode.value !== undefined &&
-    props.primitiveResults.includes(astNode.value)
-  ) {
-    return astNode.value
-  }
-
-  return null
-}
-
-const indent = (props.level || 0) * 20
+const indent = computed(() => (props.level || 0) * 20)
 </script>
 
 <template>
